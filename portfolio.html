@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Alexis L. Maghanoy | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── VARIABLES ───────────────────────────────────────────────── */
+    :root {
+      --bg:         #f7f8fc;
+      --bg2:        #ffffff;
+      --surface:    #eef1f8;
+      --border:     #dde2ef;
+      --border-dark:#c4cce0;
+
+      --navy:       #1c3a6e;
+      --navy-light: #2a52a0;
+      --sky:        #3b82f6;
+      --sky-light:  #dbeafe;
+      --teal:       #0d9488;
+      --teal-light: #ccfbf1;
+
+      --text:       #1a1f36;
+      --text-md:    #3d4663;
+      --text-soft:  #6b7694;
+
+      --shadow-sm:  0 1px 4px rgba(28,58,110,.07);
+      --shadow-md:  0 4px 20px rgba(28,58,110,.10);
+      --shadow-lg:  0 10px 40px rgba(28,58,110,.13);
+
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Plus Jakarta Sans', sans-serif;
+      --mono:  'JetBrains Mono', monospace;
+
+      --radius: 10px;
+    }
+
+    /* ─── RESET ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--sky-light); color: var(--navy); }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--surface); }
+    ::-webkit-scrollbar-thumb { background: var(--sky); border-radius: 3px; }
+
+    /* ─── LAYOUT ──────────────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 7rem 0; position: relative; }
+
+    /* ─── NAV ─────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(247,248,252,.88);
+      backdrop-filter: blur(18px) saturate(1.6);
+      border-bottom: 1px solid transparent;
+      transition: border-color .35s, box-shadow .35s;
+    }
+    nav.scrolled {
+      border-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .6rem;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--navy);
+      display: grid; place-items: center;
+      font-family: var(--serif); font-size: .95rem;
+      color: #fff; font-weight: 700;
+    }
+    .nav-logo-text {
+      font-weight: 600; font-size: .9rem; color: var(--navy);
+      letter-spacing: .01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .82rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-soft); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--navy); color: #fff !important;
+      padding: .4rem 1.1rem; border-radius: 6px;
+      transition: background .2s, transform .2s !important;
+    }
+    .nav-cta:hover { background: var(--navy-light) !important; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; padding: 4px; }
+    .hamburger span { width: 22px; height: 1.8px; background: var(--navy); border-radius: 2px; transition: .3s; display: block; }
+
+    /* ─── HERO ────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 80px;
+      background: var(--bg2);
+      position: relative; overflow: hidden;
+    }
+
+    /* Soft dot grid background */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(var(--border) 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+      opacity: .7;
+    }
+
+    /* Gradient blobs */
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(70px); pointer-events: none;
+    }
+    .blob1 { width: 600px; height: 600px; background: var(--sky-light); top: -200px; right: -150px; opacity: .6; }
+    .blob2 { width: 400px; height: 400px; background: var(--teal-light); bottom: -100px; left: -100px; opacity: .5; }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1.1fr 1fr;
+      gap: 4rem; align-items: center;
+      width: 100%; max-width: 1100px;
+      margin: 0 auto; padding: 0 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--mono); font-size: .7rem;
+      color: var(--teal); background: var(--teal-light);
+      border: 1px solid rgba(13,148,136,.2);
+      border-radius: 20px; padding: .3rem .9rem;
+      margin-bottom: 1.6rem; letter-spacing: .08em;
+      animation: fadeUp .7s ease both;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: blink 2s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      line-height: 1.12; color: var(--navy);
+      animation: fadeUp .8s .07s ease both;
+    }
+    .hero-name .accent { color: var(--sky); font-style: italic; }
+
+    .hero-tagline {
+      margin-top: 1.2rem;
+      font-size: clamp(.88rem, 1.6vw, 1rem);
+      color: var(--text-soft); font-weight: 400;
+      letter-spacing: .03em;
+      animation: fadeUp .8s .14s ease both;
+    }
+    .hero-tagline strong { color: var(--text-md); font-weight: 600; }
+
+    .hero-desc {
+      margin-top: 1.6rem; font-size: .92rem;
+      color: var(--text-soft); line-height: 1.9;
+      max-width: 500px;
+      animation: fadeUp .8s .2s ease both;
+    }
+
+    .hero-actions {
+      margin-top: 2.4rem; display: flex; gap: .9rem; flex-wrap: wrap;
+      animation: fadeUp .8s .28s ease both;
+    }
+    .btn-primary, .btn-secondary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .72rem 1.7rem; border-radius: 8px;
+      font-size: .85rem; font-weight: 600; cursor: pointer;
+      text-decoration: none; border: none;
+      font-family: var(--sans); transition: .2s;
+    }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: 0 6px 22px rgba(28,58,110,.22); }
+    .btn-secondary { background: transparent; color: var(--navy); border: 1.5px solid var(--border-dark); }
+    .btn-secondary:hover { border-color: var(--navy); background: var(--sky-light); transform: translateY(-2px); }
+
+    /* Hero stats */
+    .hero-stats {
+      margin-top: 3rem; display: flex; gap: 2rem;
+      animation: fadeUp .8s .35s ease both;
+    }
+    .stat { display: flex; flex-direction: column; gap: .1rem; }
+    .stat-num { font-family: var(--serif); font-size: 1.7rem; color: var(--navy); font-weight: 700; }
+    .stat-label { font-size: .75rem; color: var(--text-soft); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+
+    /* Hero visual card */
+    .hero-visual { animation: fadeUp .9s .15s ease both; }
+    .profile-card {
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      position: relative; overflow: hidden;
+    }
+    .profile-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--navy), var(--sky), var(--teal));
+    }
+    .profile-photo {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: var(--surface);
+      border: 3px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem; margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-card h3 { font-weight: 700; font-size: 1.1rem; color: var(--navy); }
+    .profile-card p { font-size: .8rem; color: var(--text-soft); margin-top: .2rem; }
+    .profile-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.2rem; }
+    .ptag {
+      font-size: .72rem; font-weight: 500;
+      padding: .25rem .75rem; border-radius: 20px;
+      background: var(--sky-light); color: var(--navy-light);
+      border: 1px solid rgba(59,130,246,.2);
+    }
+    .ptag.teal { background: var(--teal-light); color: var(--teal); border-color: rgba(13,148,136,.2); }
+    .profile-divider { border: none; border-top: 1px solid var(--border); margin: 1.4rem 0; }
+    .profile-detail { display: flex; align-items: center; gap: .6rem; font-size: .82rem; color: var(--text-md); margin-bottom: .5rem; }
+    .profile-detail span:first-child { color: var(--text-soft); width: 18px; text-align: center; }
+    .skill-bar-wrap { margin-top: 1.4rem; }
+    .sbar-label { display: flex; justify-content: space-between; font-size: .75rem; color: var(--text-soft); margin-bottom: .35rem; font-weight: 500; }
+    .sbar { height: 5px; background: var(--surface); border-radius: 3px; overflow: hidden; }
+    .sbar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--navy), var(--sky)); animation: grow 1.2s ease both; }
+    @keyframes grow { from { width: 0 } }
+
+    /* ─── SECTION HEADERS ─────────────────────────────────────────── */
+    .section-label {
+      font-family: var(--mono); font-size: .7rem;
+      color: var(--sky); letter-spacing: .18em;
+      text-transform: uppercase; margin-bottom: .8rem;
+    }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--navy); line-height: 1.2; margin-bottom: .8rem;
+    }
+    .section-sub { font-size: .92rem; color: var(--text-soft); max-width: 540px; line-height: 1.8; }
+
+    /* ─── ABOUT ───────────────────────────────────────────────────── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.45fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-card-wrap { position: relative; }
+    .about-photo-card {
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .about-photo-top {
+      height: 260px;
+      background: linear-gradient(135deg, var(--sky-light) 0%, var(--teal-light) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; position: relative;
+    }
+    .about-photo-top::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%233b82f6' fill-opacity='0.06'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .photo-label {
+      font-family: var(--mono); font-size: .65rem;
+      color: var(--text-soft); position: absolute; bottom: 10px; right: 12px;
+    }
+    .about-photo-body { padding: 1.4rem; }
+    .about-photo-body strong { font-size: .95rem; color: var(--navy); display: block; margin-bottom: .2rem; }
+    .about-photo-body span { font-size: .8rem; color: var(--text-soft); }
+    .about-corner {
+      position: absolute; top: -12px; left: -12px;
+      width: 56px; height: 56px;
+      border-top: 3px solid var(--sky);
+      border-left: 3px solid var(--sky);
+      border-radius: 6px;
+    }
+    .about-corner2 {
+      position: absolute; bottom: -12px; right: -12px;
+      width: 56px; height: 56px;
+      border-bottom: 3px solid var(--teal);
+      border-right: 3px solid var(--teal);
+      border-radius: 6px;
+    }
+
+    .about-text p { color: var(--text-soft); font-size: .92rem; margin-bottom: 1rem; line-height: 1.9; }
+    .about-text p strong { color: var(--text-md); font-weight: 600; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; margin-top: 1.8rem; }
+    .info-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 8px; padding: .9rem 1rem;
+    }
+    .info-key { font-family: var(--mono); font-size: .65rem; color: var(--text-soft); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .2rem; }
+    .info-val { font-size: .88rem; color: var(--navy); font-weight: 600; }
+
+    /* ─── SKILLS ──────────────────────────────────────────────────── */
+    #skills { background: var(--bg2); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.3rem; margin-top: 3rem;
+    }
+    .skill-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.6rem;
+      transition: .25s;
+      position: relative; overflow: hidden;
+    }
+    .skill-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--navy), var(--sky));
+      transform: scaleX(0); transition: transform .3s;
+      transform-origin: left;
+    }
+    .skill-card:hover { border-color: var(--sky); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .skill-card:hover::after { transform: scaleX(1); }
+    .skill-icon-wrap {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--sky-light); display: grid; place-items: center;
+      font-size: 1.3rem; margin-bottom: 1.1rem;
+    }
+    .skill-icon-wrap.teal { background: var(--teal-light); }
+    .skill-icon-wrap.navy { background: rgba(28,58,110,.08); }
+    .skill-name { font-weight: 700; font-size: .97rem; color: var(--navy); margin-bottom: .45rem; }
+    .skill-desc { font-size: .83rem; color: var(--text-soft); line-height: 1.75; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
+    .tag {
+      font-family: var(--mono); font-size: .64rem;
+      color: var(--navy-light); background: var(--sky-light);
+      border: 1px solid rgba(59,130,246,.2);
+      border-radius: 4px; padding: .18rem .55rem; letter-spacing: .05em;
+    }
+    .tag.teal { color: var(--teal); background: var(--teal-light); border-color: rgba(13,148,136,.2); }
+
+    /* ─── PROJECTS ────────────────────────────────────────────────── */
+    #projects { background: var(--bg); }
+
+    /* Featured */
+    .project-featured {
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      margin-bottom: 2rem;
+      transition: box-shadow .3s, border-color .3s;
+    }
+    .project-featured:hover { box-shadow: var(--shadow-lg); border-color: var(--border-dark); }
+
+    .project-diagram-pane {
+      background: linear-gradient(135deg, #e8f4fd 0%, #e0f7f4 100%);
+      padding: 2.8rem 2rem;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; min-height: 380px;
+    }
+    .arch {
+      display: flex; flex-direction: column;
+      align-items: center; gap: .7rem;
+      width: 100%; max-width: 300px;
+    }
+    .arch-row { display: flex; align-items: center; gap: .6rem; width: 100%; justify-content: center; }
+    .abox {
+      background: var(--bg2);
+      border: 1.5px solid var(--border-dark);
+      border-radius: 6px;
+      padding: .45rem .85rem;
+      font-family: var(--mono); font-size: .66rem;
+      color: var(--text-md);
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+    }
+    .abox.navy { border-color: var(--navy); color: var(--navy); background: rgba(28,58,110,.05); font-weight: 600; }
+    .abox.sky  { border-color: var(--sky);  color: var(--sky);  background: var(--sky-light); }
+    .abox.teal { border-color: var(--teal); color: var(--teal); background: var(--teal-light); }
+    .aline { width: 1px; height: 22px; background: var(--border-dark); }
+    .arrowdown { color: var(--border-dark); font-size: .9rem; line-height: 1; }
+    .abox.wide { width: 100%; text-align: center; }
+
+    .project-info { padding: 2.8rem; display: flex; flex-direction: column; justify-content: center; }
+    .proj-num { font-family: var(--mono); font-size: .68rem; color: var(--sky); letter-spacing: .14em; margin-bottom: .7rem; }
+    .proj-title { font-family: var(--serif); font-size: 1.7rem; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+    .proj-desc { font-size: .87rem; color: var(--text-soft); line-height: 1.9; margin-bottom: 1.5rem; }
+    .proj-meta { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .5rem; }
+    .meta-row { display: flex; gap: .7rem; font-size: .83rem; }
+    .meta-k { color: var(--text-soft); min-width: 80px; font-weight: 500; }
+    .meta-v { color: var(--navy); font-weight: 600; }
+
+    .phases { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+    .phase {
+      font-family: var(--mono); font-size: .62rem;
+      padding: .22rem .65rem; border-radius: 20px; border: 1.5px solid;
+    }
+    .phase.done  { color: var(--teal); border-color: var(--teal); background: var(--teal-light); }
+    .phase.active { color: var(--sky); border-color: var(--sky); background: var(--sky-light); }
+
+    /* Mini cards */
+    .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(295px, 1fr)); gap: 1.2rem; }
+    .mini-card {
+      background: var(--bg2); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      transition: .22s;
+    }
+    .mini-card:hover { border-color: var(--sky); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .mini-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; }
+    .mini-icon {
+      width: 40px; height: 40px; border-radius: 9px;
+      background: var(--sky-light); display: grid; place-items: center; font-size: 1.2rem;
+    }
+    .mini-icon.teal { background: var(--teal-light); }
+    .mini-badge {
+      font-family: var(--mono); font-size: .61rem;
+      padding: .2rem .6rem; border-radius: 12px;
+      background: var(--teal-light); color: var(--teal);
+      border: 1px solid rgba(13,148,136,.2); font-weight: 500;
+    }
+    .mini-title { font-weight: 700; color: var(--navy); font-size: .95rem; margin-bottom: .45rem; }
+    .mini-desc { font-size: .82rem; color: var(--text-soft); line-height: 1.75; }
+    .mini-stack { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
+
+    /* ─── EXPERIENCE ──────────────────────────────────────────────── */
+    #experience { background: var(--bg2); }
+    .timeline { margin-top: 3rem; padding-left: 1.8rem; position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, var(--navy) 0%, var(--sky) 60%, var(--teal) 100%);
+      border-radius: 2px;
+    }
+    .tl-item {
+      position: relative; margin-bottom: 3rem;
+      opacity: 0; transform: translateX(-14px);
+      transition: opacity .5s, transform .5s;
+    }
+    .tl-item.visible { opacity: 1; transform: translateX(0); }
+    .tl-dot {
+      position: absolute; left: -2.35rem; top: .28rem;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg2);
+      border: 2.5px solid var(--navy);
+      box-shadow: 0 0 0 3px var(--sky-light);
+    }
+    .tl-period { font-family: var(--mono); font-size: .68rem; color: var(--sky); letter-spacing: .1em; margin-bottom: .35rem; }
+    .tl-role { font-weight: 700; font-size: 1.05rem; color: var(--navy); margin-bottom: .15rem; }
+    .tl-org { font-size: .84rem; color: var(--text-soft); margin-bottom: .7rem; }
+    .tl-body { font-size: .87rem; color: var(--text-soft); line-height: 1.85; }
+    .tl-body strong { color: var(--text-md); font-weight: 600; }
+
+    /* ─── CONTACT ─────────────────────────────────────────────────── */
+    #contact {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+    }
+    #contact .section-label { color: rgba(255,255,255,.5); }
+    .contact-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: #fff; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .contact-title em { font-style: italic; color: #93c5fd; }
+    .contact-sub { color: rgba(255,255,255,.6); font-size: .93rem; margin-bottom: 3rem; }
+    .contact-grid {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center; max-width: 620px; margin: 0 auto;
+    }
+    .c-link {
+      display: flex; align-items: center; gap: .65rem;
+      padding: .85rem 1.7rem; border-radius: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #fff; text-decoration: none;
+      font-size: .86rem; font-weight: 500;
+      transition: .2s;
+    }
+    .c-link:hover { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.3); transform: translateY(-2px); }
+    .c-link .icon { font-size: 1.1rem; }
+
+    /* ─── FOOTER ──────────────────────────────────────────────────── */
+    footer {
+      background: #111827;
+      padding: 1.8rem 2rem;
+      text-align: center;
+      font-family: var(--mono); font-size: .7rem;
+      color: rgba(255,255,255,.3);
+    }
+    footer span { color: rgba(255,255,255,.55); }
+
+    /* ─── ANIMATIONS ──────────────────────────────────────────────── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .55s, transform .55s; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ─── MOBILE ──────────────────────────────────────────────────── */
+    @media(max-width:900px){
+      .hero-inner { grid-template-columns:1fr; text-align:center; }
+      .hero-desc { margin:1.6rem auto 0; }
+      .hero-actions { justify-content:center; }
+      .hero-stats { justify-content:center; }
+      .hero-visual { display:none; }
+      .about-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .project-featured { grid-template-columns:1fr; }
+      .project-diagram-pane { min-height:220px; padding:2rem; }
+      .info-grid { grid-template-columns:1fr; }
+    }
+    @media(max-width:640px){
+      .nav-links { display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(247,248,252,.97); padding:1.5rem 2rem; border-bottom:1px solid var(--border); gap:1.2rem; }
+      .nav-links.open { display:flex; }
+      .hamburger { display:flex; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────────────── -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-mark">JA</div>
+    <span class="nav-logo-text">John Alexis</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <div class="hero-inner">
+    <!-- Left: Text -->
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        BSIS Graduate · JRMSU – Siocon Campus
+      </div>
+      <h1 class="hero-name">
+        Hi, I'm<br>
+        <span class="accent">John Alexis</span><br>
+        Maghanoy.
+      </h1>
+      <p class="hero-tagline">
+        <strong>Full-Stack Developer</strong> &nbsp;·&nbsp;
+        Capstone Coordinator &nbsp;·&nbsp;
+        System Builder
+      </p>
+      <p class="hero-desc">
+        I build real-world software solutions for government offices and academic institutions in
+        Siocon, Zamboanga del Norte — turning community problems into reliable, working systems.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">▸ &nbsp;View My Work</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Capstone Projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Gov't Deployments</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Months Live Testing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Profile card -->
+    <div class="hero-visual">
+      <div class="profile-card">
+        <div class="profile-photo">👤</div>
+        <h3>John Alexis L. Maghanoy</h3>
+        <p>BS Information Systems · JRMSU Siocon</p>
+        <div class="profile-tags">
+          <span class="ptag">Full-Stack Dev</span>
+          <span class="ptag">PHP &amp; MySQL</span>
+          <span class="ptag teal">Gov't Systems</span>
+          <span class="ptag teal">Capstone Advisor</span>
+        </div>
+        <hr class="profile-divider" />
+        <div class="profile-detail"><span>📍</span><span>Siocon, Zamboanga del Norte</span></div>
+        <div class="profile-detail"><span>🏫</span><span>JRMSU – Siocon Campus, CCS</span></div>
+        <div class="profile-detail"><span>🎓</span><span>BS Information Systems (BSIS)</span></div>
+        <div class="skill-bar-wrap">
+          <div class="sbar-label"><span>Frontend</span><span>90%</span></div>
+          <div class="sbar"><div class="sbar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-wrap" style="margin-top:.7rem">
+          <div class="sbar-label"><span>Backend &amp; DB</span><span>85%</span></div>
+          <div class="sbar"><div class="sbar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar-wrap" style="margin-top:.7rem">
+          <div class="sbar-label"><span>Project Management</span><span>92%</span></div>
+          <div class="sbar"><div class="sbar-fill" style="width:92%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <!-- Visual -->
+      <div class="about-card-wrap reveal">
+        <div class="about-corner"></div>
+        <div class="about-photo-card">
+          <div class="about-photo-top">
+            👤
+            <span class="photo-label">// your-photo.jpg</span>
+          </div>
+          <div class="about-photo-body">
+            <strong>John Alexis L. Maghanoy</strong>
+            <span>Developer · Coordinator · BSIS Graduate</span>
+          </div>
+        </div>
+        <div class="about-corner2"></div>
+      </div>
+
+      <!-- Text -->
+      <div class="about-text reveal">
+        <div class="section-label">// About Me</div>
+        <h2 class="section-title">Developer &amp; <em style="font-style:italic">Community Builder</em></h2>
+
+        <p>I graduated with a <strong>Bachelor of Science in Information Systems (BSIS)</strong> from Jose Rizal Memorial State University – Siocon Campus, College of Computing Studies. My work sits at the intersection of technology and local governance.</p>
+
+        <p>I have hands-on experience building, testing, and deploying systems directly to municipal offices — conducting staff training and overseeing the full transition from manual to digital workflows in real government environments.</p>
+
+        <p>Beyond development, I serve as a <strong>Capstone Coordinator</strong>, guiding student research groups through the complete SDLC — from requirements gathering and design through testing, implementation, and formal hardbound thesis submission.</p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-key">Full Name</div>
+            <div class="info-val">John Alexis L. Maghanoy</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Degree</div>
+            <div class="info-val">BSIS</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Institution</div>
+            <div class="info-val">JRMSU – Siocon Campus</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Location</div>
+            <div class="info-val">Siocon, Zamboanga del Norte</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ─────────────────────────────────────────────────────── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">// Technical Skills</div>
+    <h2 class="section-title reveal">What I Work With</h2>
+    <p class="section-sub reveal">A practical skill set built through real deployments in government and academic environments.</p>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon-wrap">🌐</div>
+        <div class="skill-name">Frontend Development</div>
+        <div class="skill-desc">Crafting responsive, interactive interfaces with clean semantic markup and smooth user experiences that work great for non-technical staff.</div>
+        <div class="skill-tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Bootstrap 5</span><span class="tag">JavaScript</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon-wrap">⚡</div>
+        <div class="skill-name">SPA &amp; AJAX</div>
+        <div class="skill-desc">Building Single Page Application patterns with AJAX for real-time search, live updates, and seamless navigation — no full page reloads needed.</div>
+        <div class="skill-tags"><span class="tag">AJAX</span><span class="tag">SPA Pattern</span><span class="tag">Live Search</span><span class="tag">Dynamic UI</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon-wrap teal">🔧</div>
+        <div class="skill-name">Backend &amp; Database</div>
+        <div class="skill-desc">Full server-side CRUD operations with PHP, and MySQL via XAMPP for offline-capable localhost deployments in government office environments.</div>
+        <div class="skill-tags"><span class="tag teal">PHP</span><span class="tag teal">MySQL</span><span class="tag teal">XAMPP</span><span class="tag teal">phpMyAdmin</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon-wrap navy">🔒</div>
+        <div class="skill-name">System Security</div>
+        <div class="skill-desc">Implementing robust security layers on both frontend and backend for sensitive government document management systems.</div>
+        <div class="skill-tags"><span class="tag">Form Validation</span><span class="tag">Authentication</span><span class="tag">Secure CRUD</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon-wrap">📋</div>
+        <div class="skill-name">Project Management</div>
+        <div class="skill-desc">Leading teams through complete SDLC phases — requirements gathering, design, development, testing, deployment, training, and maintenance.</div>
+        <div class="skill-tags"><span class="tag">SDLC</span><span class="tag">ERD</span><span class="tag">DFD</span><span class="tag">UI/UX</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon-wrap teal">📚</div>
+        <div class="skill-name">Academic Documentation</div>
+        <div class="skill-desc">Producing thesis-grade documentation following JRMSU standards — test cases, ISO/IEC 25010 evaluations, and formal front matter for hardbound binding.</div>
+        <div class="skill-tags"><span class="tag teal">ISO/IEC 25010</span><span class="tag teal">Test Cases</span><span class="tag teal">JRMSU Format</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ───────────────────────────────────────────────────── -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">// Projects</div>
+    <h2 class="section-title reveal">Systems I've Built</h2>
+    <p class="section-sub reveal">Real deployments for real offices — built, tested, and handed over to the people who use them daily.</p>
+
+    <!-- Featured -->
+    <div class="project-featured reveal" style="margin-top:3rem">
+      <div class="project-diagram-pane">
+        <div class="arch">
+          <div class="abox navy wide">📁 BPLO — Municipal Hall, Siocon</div>
+          <div class="aline"></div>
+          <div class="arch-row">
+            <div class="abox sky">Searchable UI</div>
+            <div style="color:var(--border-dark)">→</div>
+            <div class="abox navy">index.php (SPA)</div>
+            <div style="color:var(--border-dark)">→</div>
+            <div class="abox">PHP Backend</div>
+          </div>
+          <div class="aline"></div>
+          <div class="abox teal wide">⚡ AJAX · Real-time Search · Live Updates</div>
+          <div class="aline"></div>
+          <div class="abox wide">MySQL via XAMPP — Offline Localhost</div>
+          <div class="aline"></div>
+          <div class="abox navy wide">🔒 Secure Document Archive</div>
+        </div>
+      </div>
+
+      <div class="project-info">
+        <div class="proj-num">01 — Featured Project</div>
+        <h3 class="proj-title">BPLO Document Archiving System</h3>
+        <p class="proj-desc">A secure, offline document management system built for the Business Permit and Licensing Office of the Municipality of Siocon. Replaces unsorted permit printouts in cabinets with a fully searchable digital archive running offline through XAMPP localhost — no internet required.</p>
+
+        <div class="proj-meta">
+          <div class="meta-row"><span class="meta-k">Client</span><span class="meta-v">Siocon BPLO, Municipal Hall</span></div>
+          <div class="meta-row"><span class="meta-k">Timeline</span><span class="meta-v">October 2025 – May 2026</span></div>
+          <div class="meta-row"><span class="meta-k">Architecture</span><span class="meta-v">SPA · PHP · MySQL · AJAX</span></div>
+        </div>
+
+        <div class="phases">
+          <span class="phase done">✓ Requirements</span>
+          <span class="phase done">✓ Design</span>
+          <span class="phase done">✓ Development</span>
+          <span class="phase done">✓ Testing</span>
+          <span class="phase active">◎ Implementation</span>
+          <span class="phase active">◎ Maintenance</span>
+        </div>
+
+        <div class="skill-tags">
+          <span class="tag">HTML</span><span class="tag">CSS</span>
+          <span class="tag">Bootstrap 5</span><span class="tag">JavaScript</span>
+          <span class="tag teal">PHP</span><span class="tag teal">MySQL</span>
+          <span class="tag teal">XAMPP</span><span class="tag">AJAX</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini grid -->
+    <div class="mini-grid">
+      <div class="mini-card reveal">
+        <div class="mini-top">
+          <div class="mini-icon">🗳️</div>
+          <span class="mini-badge">✓ Coordinated</span>
+        </div>
+        <div class="mini-title">Web-Based E-Voting System</div>
+        <div class="mini-desc">Secure online voting platform. Oversaw full documentation, test case preparation, and hardbound thesis submission.</div>
+        <div class="mini-stack"><span class="tag">Web</span><span class="tag">Security</span><span class="tag teal">Capstone</span></div>
+      </div>
+
+      <div class="mini-card reveal">
+        <div class="mini-top">
+          <div class="mini-icon">🎓</div>
+          <span class="mini-badge">✓ Coordinated</span>
+        </div>
+        <div class="mini-title">LiveTrack — Student Monitoring</div>
+        <div class="mini-desc">AI-based face recognition system for student attendance. Guided the team through SDLC phases and ISO/IEC 25010 evaluation.</div>
+        <div class="mini-stack"><span class="tag">AI</span><span class="tag">Face Recognition</span><span class="tag teal">Capstone</span></div>
+      </div>
+
+      <div class="mini-card reveal">
+        <div class="mini-top">
+          <div class="mini-icon teal">🐟</div>
+          <span class="mini-badge">✓ Coordinated</span>
+        </div>
+        <div class="mini-title">Smart Feed — Bangus IoT System</div>
+        <div class="mini-desc">IoT-integrated bangus farming management system. Coordinated final hardbound preparation and technical documentation.</div>
+        <div class="mini-stack"><span class="tag teal">IoT</span><span class="tag teal">Sensors</span><span class="tag teal">Capstone</span></div>
+      </div>
+
+      <div class="mini-card reveal">
+        <div class="mini-top">
+          <div class="mini-icon">🏨</div>
+          <span class="mini-badge">✓ Coordinated</span>
+        </div>
+        <div class="mini-title">ZiaReserve — Offline Booking System</div>
+        <div class="mini-desc">Offline hotel reservation system for Zia's Travelers Inn. Managed documentation and academic binding submission readiness.</div>
+        <div class="mini-stack"><span class="tag">Offline</span><span class="tag">Booking</span><span class="tag teal">Capstone</span></div>
+      </div>
+
+      <div class="mini-card reveal">
+        <div class="mini-top">
+          <div class="mini-icon">🪪</div>
+          <span class="mini-badge">✓ Coordinated</span>
+        </div>
+        <div class="mini-title">BPLMIS — Business Permit MIS</div>
+        <div class="mini-desc">Business Permit and Licensing Management Information System for the Municipality of Siocon. Full documentation and hardbound guidance.</div>
+        <div class="mini-stack"><span class="tag">MIS</span><span class="tag">Government</span><span class="tag teal">Capstone</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIENCE ─────────────────────────────────────────────────── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">// Experience</div>
+    <h2 class="section-title reveal">Where I've Contributed</h2>
+    <p class="section-sub reveal">From initial interviews at the municipal hall to live staff training — I stay involved through every phase.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">May 2026 — Ongoing</div>
+        <div class="tl-role">System Maintainer</div>
+        <div class="tl-org">BPLO Document Archiving System, Municipality of Siocon</div>
+        <div class="tl-body">Monitoring post-deployment stability, maintaining the XAMPP/MySQL database as permit records grow, ensuring SPA performance stays fast, and keeping security features working correctly for ongoing document safety.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">April 2026 — May 2026</div>
+        <div class="tl-role">System Implementor &amp; Trainer</div>
+        <div class="tl-org">BPLO, Municipality of Siocon, Zamboanga del Norte</div>
+        <div class="tl-body">Deployed the offline system at the municipal hall. Conducted <strong>hands-on staff training</strong> on the searchable UI and digital folder sorting workflow, managing the full transition from physical cabinet filing to the digital archive.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">January 2026 — March 2026</div>
+        <div class="tl-role">Lead Developer — Testing &amp; QA</div>
+        <div class="tl-org">BPLO Document Archiving System</div>
+        <div class="tl-body">Conducted extensive functionality and usability testing with BPLO staff. Resolved critical bugs in <strong>form submission and frontend–backend synchronization</strong>, added staff-requested features, and enhanced overall system security for production.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">November 2025 — December 2025</div>
+        <div class="tl-role">Full-Stack Developer</div>
+        <div class="tl-org">BPLO Document Archiving System</div>
+        <div class="tl-body">Built the complete system in two months — <strong>HTML, CSS, Bootstrap 5, JavaScript, AJAX</strong> for the SPA-style frontend; <strong>PHP + MySQL via XAMPP</strong> for the offline-capable backend. Implemented real-time search and live-update features through AJAX.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">October 2025 — Present</div>
+        <div class="tl-role">Capstone Coordinator</div>
+        <div class="tl-org">JRMSU – Siocon Campus, College of Computing Studies</div>
+        <div class="tl-body">Overseeing multiple student capstone projects — managing documentation, guiding teams through SDLC phases, and ensuring all projects meet <strong>academic standards for hardbound thesis binding</strong>. Projects include E-Voting, LiveTrack, Smart Feed, ZiaReserve, and BPLMIS.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">October 2025 — November 2025</div>
+        <div class="tl-role">Requirements Analyst &amp; System Designer</div>
+        <div class="tl-org">Municipality of Siocon — BPLO Project</div>
+        <div class="tl-body">Conducted informal interviews with BPLO staff at the municipal hall, identified the unsorted filing problem, and led the design phase — <strong>programming language selection, database schema, ERD, and UI/UX mockups</strong>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─────────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label reveal">// Let's Connect</div>
+    <h2 class="contact-title reveal">Have a project <em>in mind?</em></h2>
+    <p class="contact-sub reveal">Open to collaboration, freelance development, and opportunities to build technology solutions for local communities and institutions across Mindanao.</p>
+
+    <div class="contact-grid reveal">
+      <a href="mailto:your@email.com" class="c-link"><span class="icon">✉️</span> Email Me</a>
+      <a href="https://github.com/" target="_blank" class="c-link"><span class="icon">🐙</span> GitHub</a>
+      <a href="https://linkedin.com/" target="_blank" class="c-link"><span class="icon">💼</span> LinkedIn</a>
+      <a href="https://www.facebook.com/" target="_blank" class="c-link"><span class="icon">📘</span> Facebook</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
+<footer>
+  Designed &amp; built by <span>John Alexis L. Maghanoy</span> &nbsp;·&nbsp;
+  JRMSU – Siocon Campus &nbsp;·&nbsp; <span>2026</span>
+</footer>
+
+<!-- ─── SCRIPTS ─────────────────────────────────────────────────────── -->
+<script>
+  /* Sticky nav */
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  /* Scroll reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
+
+  /* Stagger skill & mini cards */
+  document.querySelectorAll('.skills-grid, .mini-grid').forEach(g => {
+    Array.from(g.children).forEach((c, i) => { c.style.transitionDelay = (i * 0.07) + 's'; });
+  });
+</script>
+</body>
+</html>
